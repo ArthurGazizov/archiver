@@ -13,16 +13,16 @@ import java.util.Map;
  * Created on 30.09.17.
  */
 public class PackerLZWImpl implements Packer {
-  private final Map<ByteBuffer, Integer> map;
+  private Map<ByteBuffer, Integer> map;
   private final LZWConfig config;
 
   public PackerLZWImpl() {
     config = new LZWConfig();
-    this.map = LZWUtils.defaultMap();
   }
 
   @Override
   public byte[] pack(byte[] input) {
+    this.map = LZWUtils.defaultMap();
     List<Byte> bytesList = new ArrayList<>();
     int position = 0;
     while (position < input.length) {

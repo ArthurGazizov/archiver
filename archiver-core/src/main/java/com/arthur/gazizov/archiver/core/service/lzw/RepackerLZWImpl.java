@@ -16,18 +16,18 @@ import java.util.Optional;
  */
 public class RepackerLZWImpl implements Repacker {
   private final LZWConfig config;
-  private final Map<ByteBuffer, Integer> map;
-  private final Map<Integer, ByteBuffer> reversed;
+  private Map<ByteBuffer, Integer> map;
+  private Map<Integer, ByteBuffer> reversed;
 
   public RepackerLZWImpl() {
     this.config = new LZWConfig();
-    this.map = LZWUtils.defaultMap();
-    this.reversed = new HashMap<>();
-    this.map.forEach((key, value) -> reversed.put(value, key));
   }
 
   @Override
   public byte[] repack(byte[] bytes) {
+    this.map = LZWUtils.defaultMap();
+    this.reversed = new HashMap<>();
+    this.map.forEach((key, value) -> reversed.put(value, key));
     List<Byte> builder = new ArrayList<>();
     int position = 0;
     Integer prevValueInit = null;
