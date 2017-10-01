@@ -1,7 +1,7 @@
 package com.arthur.gazizov.archiver.core.service.lzw;
 
-import com.arthur.gazizov.archiver.core.service.Packer;
-import com.arthur.gazizov.archiver.core.service.Repacker;
+import com.arthur.gazizov.archiver.core.factory.ArchiverFactory;
+import com.arthur.gazizov.archiver.core.factory.impl.LZWFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -19,14 +19,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author Arthur Gazizov (Cinarra Systems)
  * Created on 30.09.17.
  */
-public class PackerLZWImplTest {
-  private Packer packer;
-  private Repacker repacker;
+public class LZWImplTest {
+  private ArchiverFactory archiverFactory;
 
   @Before
   public void init() {
-    packer = new PackerLZWImpl();
-    repacker = new RepackerLZWImpl();
+    archiverFactory = new LZWFactory();
   }
 
   @Test
@@ -38,10 +36,14 @@ public class PackerLZWImplTest {
     String originalMessage = "abrakadabra" + builder.toString();
     byte[] originalMessageBytes = originalMessage.getBytes();
 
-    byte[] packedBytes = packer.pack(originalMessageBytes);
+    byte[] packedBytes = archiverFactory
+            .loadPacker()
+            .pack(originalMessageBytes);
     Assert.assertTrue(packedBytes.length <= originalMessageBytes.length);
 
-    byte[] repackedBytes = repacker.repack(packedBytes);
+    byte[] repackedBytes = archiverFactory
+            .loadRepacker()
+            .repack(packedBytes);
     String repackedMessage = new String(repackedBytes);
     Assert.assertEquals(originalMessage, repackedMessage);
   }
@@ -51,7 +53,9 @@ public class PackerLZWImplTest {
   public void testFile() throws IOException {
     Path path = Paths.get("/Users/arthurgazizov/Desktop/book1.txt");
     byte[] bytes = Files.readAllBytes(path);
-    byte[] pack = packer.pack(bytes);
+    byte[] pack = archiverFactory
+            .loadPacker()
+            .pack(bytes);
     OutputStream outputStream = new FileOutputStream("/Users/arthurgazizov/Desktop/book1.lzw");
     outputStream.write(pack);
     outputStream.close();
