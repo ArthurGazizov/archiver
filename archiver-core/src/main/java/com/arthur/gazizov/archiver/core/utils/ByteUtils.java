@@ -41,9 +41,6 @@ public class ByteUtils {
 
 
   private static byte[] intToBytesType(int x, int bytesCount) {
-//    ByteBuffer byteBuffer = ByteBuffer.allocate(bytesCount);
-//    byteBuffer.putInt(x);
-//    return byteBuffer.array();
     byte[] bytes = new byte[bytesCount];
     for (int i = bytesCount - 1, iter = 0; iter < bytesCount; i--, x >>>= 8, iter++) {
       bytes[i] = (byte) (x & 0xFF);
@@ -52,8 +49,6 @@ public class ByteUtils {
   }
 
   private static int toIntByBytes(byte[] bytes, int offset, int bytesCount) {
-//    ByteBuffer byteBuffer = ByteBuffer.wrap(bytes, offset, bytesCount);
-//    return byteBuffer.getInt();
     int ret = 0;
     for (int i = 0; i < bytesCount && i + offset < bytes.length; i++) {
       ret <<= 8;
@@ -69,6 +64,7 @@ public class ByteUtils {
     ret[ret.length - 1] = value;
     return ByteBuffer.wrap(ret);
   }
+
   public static ByteBuffer addAll(ByteBuffer buffer, byte[] bytes) {
     byte[] origin = buffer.array();
     byte[] ret = new byte[origin.length + bytes.length];
