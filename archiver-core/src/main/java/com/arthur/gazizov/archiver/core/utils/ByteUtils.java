@@ -1,12 +1,17 @@
 package com.arthur.gazizov.archiver.core.utils;
 
 import java.nio.ByteBuffer;
+import java.util.List;
 
 /**
  * @author Arthur Gazizov (Cinarra Systems)
  * Created on 30.09.17.
  */
 public class ByteUtils {
+  public static int ONE_BYTE_RANGE = (1 << 7) - 1;
+  public static int TWO_BYTE_RANGE = (1 << 15) - 1;
+  public static int THREE_BYTE_RANGE = (1 << 23) - 1;
+
   public static byte[] intTo4Bytes(int x) {
     return intToBytesType(x, 4);
   }
@@ -57,7 +62,7 @@ public class ByteUtils {
     return ret;
   }
 
-  public static ByteBuffer add(ByteBuffer buffer, byte value) {
+  public static ByteBuffer addToTail(ByteBuffer buffer, byte value) {
     byte[] origin = buffer.array();
     byte[] ret = new byte[origin.length + 1];
     System.arraycopy(origin, 0, ret, 0, origin.length);
@@ -71,5 +76,25 @@ public class ByteUtils {
     System.arraycopy(origin, 0, ret, 0, origin.length);
     System.arraycopy(bytes, 0, ret, origin.length, bytes.length);
     return ByteBuffer.wrap(ret);
+  }
+
+  public static void addToTail(List<Byte> bytes, byte[] values) {
+    for (int i = 0; i < values.length; i++) {
+      bytes.add(values[i]);
+    }
+  }
+
+  public static void addToTail(List<Byte> bytes, byte value) {
+    bytes.add(value);
+  }
+
+  public static byte[] unboxing(List<Byte> origin) {
+    byte[] ret = new byte[origin.size()];
+    int temp = 0;
+    for (byte b : origin) {
+      ret[temp] = b;
+      temp++;
+    }
+    return ret;
   }
 }

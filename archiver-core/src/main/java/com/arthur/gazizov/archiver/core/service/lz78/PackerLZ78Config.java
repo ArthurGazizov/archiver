@@ -1,10 +1,10 @@
-package com.arthur.gazizov.archiver.core.service.lzw;
+package com.arthur.gazizov.archiver.core.service.lz78;
 
 /**
  * @author Arthur Gazizov (Cinarra Systems)
- * Created on 30.09.17.
+ * Created on 02.10.17.
  */
-public class LZWConfig {
+public class PackerLZ78Config {
   private int dictionaryMaxSize = 100_000;
 
   public int getDictionaryMaxSize() {
