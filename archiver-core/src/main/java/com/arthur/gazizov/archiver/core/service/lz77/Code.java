@@ -8,13 +8,13 @@ import com.arthur.gazizov.archiver.core.utils.ByteUtils;
  */
 public class Code {
   private short length;
-  private int offset;
+  private short offset;
   private byte lastValue;
 
   public static Code fromBytes(byte[] bytes, int position) {
     short length = (short) ByteUtils.toInt2(bytes, position);
-    int offset = ByteUtils.toInt4(bytes, position + 2);
-    byte lastValue = bytes[position + 2 + 4];
+    short offset = (short) ByteUtils.toInt2(bytes, position + 2);
+    byte lastValue = bytes[position + 2 + 2];
     return Code.Builder.aCode()
             .length(length)
             .offset(offset)
@@ -36,17 +36,17 @@ public class Code {
 
   public byte[] getBytes() {
     byte[] lengthAsBytes = ByteUtils.intTo2Bytes(length);
-    byte[] offsetAsBytes = ByteUtils.intTo4Bytes(offset);
-    byte[] ret = new byte[2 + 4 + 1];
+    byte[] offsetAsBytes = ByteUtils.intTo2Bytes(offset);
+    byte[] ret = new byte[2 + 2 + 1];
     System.arraycopy(lengthAsBytes, 0, ret, 0, 2);
-    System.arraycopy(offsetAsBytes, 0, ret, 2, 4);
-    ret[6] = lastValue;
+    System.arraycopy(offsetAsBytes, 0, ret, 2, 2);
+    ret[4] = lastValue;
     return ret;
   }
 
   public static final class Builder {
     private short length;
-    private int offset;
+    private short offset;
     private byte lastValue;
 
     private Builder() {
@@ -62,7 +62,7 @@ public class Code {
     }
 
     public Builder offset(int offset) {
-      this.offset = offset;
+      this.offset = (short) offset;
       return this;
     }
 

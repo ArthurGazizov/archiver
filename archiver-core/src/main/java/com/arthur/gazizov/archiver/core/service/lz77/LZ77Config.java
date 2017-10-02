@@ -5,9 +5,14 @@ package com.arthur.gazizov.archiver.core.service.lz77;
  * Created on 01.10.17.
  */
 public class LZ77Config {
-  private int maxBufferSize = 1024;
+  private final int maxBufferLength = 100;
+  private final int maxDictionaryLength = 32000;
 
-  public int getMaxBufferSize() {
-    return maxBufferSize;
+  public int getMaxBufferLength() {
+    return maxBufferLength;
+  }
+
+  public int getMaxDictionaryLength() {
+    return maxDictionaryLength;
   }
 }
