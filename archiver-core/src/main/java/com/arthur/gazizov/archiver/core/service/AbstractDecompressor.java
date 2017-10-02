@@ -13,9 +13,11 @@ public abstract class AbstractDecompressor implements Decompressor {
     return result;
   }
 
-  protected abstract void init();
+  protected void init() {
+  }
 
-  protected abstract void dispose();
+  protected void dispose() {
+  }
 
   protected abstract byte[] process(byte[] bytes);
 }

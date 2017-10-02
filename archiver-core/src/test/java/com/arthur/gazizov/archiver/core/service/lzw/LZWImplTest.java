@@ -1,5 +1,6 @@
 package com.arthur.gazizov.archiver.core.service.lzw;
 
+import com.arthur.gazizov.archiver.core.factory.ArchiverFactory;
 import com.arthur.gazizov.archiver.core.factory.impl.LZWFactory;
 import com.arthur.gazizov.archiver.core.service.AbstractArchiverTest;
 
@@ -9,12 +10,12 @@ import com.arthur.gazizov.archiver.core.service.AbstractArchiverTest;
  */
 public class LZWImplTest extends AbstractArchiverTest {
   @Override
-  public void init() {
-    archiverFactory = new LZWFactory();
+  protected String getExtension() {
+    return ".lzw";
   }
 
   @Override
-  protected String getExtension() {
-    return ".lzw";
+  protected ArchiverFactory getArchiverFactory() {
+    return new LZWFactory();
   }
 }
