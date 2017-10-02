@@ -5,9 +5,9 @@ package com.arthur.gazizov.archiver.core.service.lz77;
  * Created on 01.10.17.
  */
 public class LZ77Config {
-  private int bufferSize = 1024;
+  private int maxBufferSize = 1024;
 
-  public int getBufferSize() {
-    return bufferSize;
+  public int getMaxBufferSize() {
+    return maxBufferSize;
   }
 }

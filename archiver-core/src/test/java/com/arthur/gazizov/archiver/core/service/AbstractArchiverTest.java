@@ -22,7 +22,9 @@ public abstract class AbstractArchiverTest {
   protected ArchiverFactory archiverFactory;
 
   @Before
-  public abstract void init();
+  public void init() {
+    archiverFactory = getArchiverFactory();
+  }
 
   @Test
   public void test() {
@@ -80,6 +82,8 @@ public abstract class AbstractArchiverTest {
   }
 
   protected abstract String getExtension();
+
+  protected abstract ArchiverFactory getArchiverFactory();
 
   private String originalFilePath() {
     return "/Users/arthurgazizov/Desktop/book.txt";
