@@ -46,6 +46,21 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.arthur.gazizov.kpfu</groupId>
+                <artifactId>archiver-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.arthur.gazizov.kpfu</groupId>
+                <artifactId>archiver-ui</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.arthur.gazizov.kpfu</groupId>
+                <artifactId>archiver-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

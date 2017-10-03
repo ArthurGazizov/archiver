@@ -2,6 +2,8 @@ package com.arthur.gazizov.archiver.core.service.lz77;
 
 import com.arthur.gazizov.archiver.core.factory.ArchiverFactory;
 import com.arthur.gazizov.archiver.core.factory.impl.LZ77Factory;
+import com.arthur.gazizov.archiver.core.factory.impl.LZ78Factory;
+import com.arthur.gazizov.archiver.core.factory.impl.ParallelFactory;
 import com.arthur.gazizov.archiver.core.service.AbstractArchiverTest;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -16,27 +18,13 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class LZ77ImplTest extends AbstractArchiverTest {
   @Override
-  @Ignore
-  @Test
-  public void test() {
-    super.test();
-  }
-
-  @Override
-  @Test
-  @Ignore
-  public void testFile() throws IOException {
-    super.testFile();
-  }
-
-  @Override
   protected String getExtension() {
     return ".lz77";
   }
 
   @Override
   protected ArchiverFactory getArchiverFactory() {
-    return new LZ77Factory();
+    return new ParallelFactory(new LZ78Factory());
   }
 
   @Test

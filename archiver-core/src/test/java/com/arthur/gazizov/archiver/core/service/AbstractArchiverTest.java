@@ -3,6 +3,7 @@ package com.arthur.gazizov.archiver.core.service;
 import com.arthur.gazizov.archiver.core.factory.ArchiverFactory;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
@@ -86,6 +87,6 @@ public abstract class AbstractArchiverTest {
   protected abstract ArchiverFactory getArchiverFactory();
 
   private String originalFilePath() {
-    return "/Users/arthurgazizov/Desktop/book.txt";
+    return "/Users/arthurgazizov/Desktop/big.txt";
   }
 }

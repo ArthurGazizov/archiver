@@ -20,8 +20,9 @@ public class DecompressorLZ77Impl extends AbstractDecompressor {
     List<Byte> bytes = new ArrayList<>();
     for (Code code : codes) {
       if (code.getOffset() >= 0) {
+        int start = bytes.size() - code.getOffset();
         for (int i = 0; i < code.getLength(); i++) {
-          bytes.add(bytes.get(code.getOffset() + i));
+          bytes.add(bytes.get(start + i));
         }
       }
       bytes.add(code.getLastValue());
