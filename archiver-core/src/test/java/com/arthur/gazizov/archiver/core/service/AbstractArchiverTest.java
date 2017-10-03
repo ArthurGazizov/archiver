@@ -87,6 +87,6 @@ public abstract class AbstractArchiverTest {
   protected abstract ArchiverFactory getArchiverFactory();
 
   private String originalFilePath() {
-    return "/Users/arthurgazizov/Desktop/book.txt";
+    return "/Users/arthurgazizov/Desktop/big.txt";
   }
 }

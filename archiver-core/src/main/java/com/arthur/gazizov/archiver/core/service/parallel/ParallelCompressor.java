@@ -69,7 +69,7 @@ public class ParallelCompressor extends AbstractCompressor {
     int[] partsIndexStart = new int[parts];
     int metaInfoSize = (1 + parts) * 4; //bytes
     int size = metaInfoSize;
-    for (int i = 0; i < results.length; i++) {
+    for (int i = 0; i < parts; i++) {
       partsIndexStart[i] = size;
       size += results[i].length;
     }
@@ -83,7 +83,7 @@ public class ParallelCompressor extends AbstractCompressor {
       metaStartPosition += 4;
     }
     int position = metaInfoSize;
-    for (int i = 0; i < results.length; i++) {
+    for (int i = 0; i < parts; i++) {
       System.arraycopy(results[i], 0, ret, position, results[i].length);
       position += results[i].length;
     }

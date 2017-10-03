@@ -15,12 +15,12 @@ import java.util.List;
  * Created on 02.10.17.
  */
 public class CompressorLZ78Impl extends AbstractCompressor {
-  private final PackerLZ78Config config;
+  private final LZ78Config config;
   private Dictionary dictionary;
   private Sequence sequence;
 
   public CompressorLZ78Impl() {
-    this.config = new PackerLZ78Config();
+    this.config = new LZ78Config();
   }
 
   @Override

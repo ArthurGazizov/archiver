@@ -16,13 +16,13 @@ import java.util.List;
  * Created on 02.10.17.
  */
 public class DecompressorLZ78Impl extends AbstractDecompressor {
-  private final PackerLZ78Config config;
+  private final LZ78Config config;
   private Dictionary dictionary;
   private ReversedDictionary reversedDictionary;
   private Sequence sequence;
 
   public DecompressorLZ78Impl() {
-    this.config = new PackerLZ78Config();
+    this.config = new LZ78Config();
   }
 
   @Override
