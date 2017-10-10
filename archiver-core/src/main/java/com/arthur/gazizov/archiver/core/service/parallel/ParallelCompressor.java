@@ -23,6 +23,11 @@ public class ParallelCompressor extends AbstractCompressor {
     this.config = new ParallelConfig();
   }
 
+  public ParallelCompressor(ArchiverFactory factory, ParallelConfig config) {
+    this.factory = factory;
+    this.config = config;
+  }
+
   @Override
   protected void init() {
     super.init();

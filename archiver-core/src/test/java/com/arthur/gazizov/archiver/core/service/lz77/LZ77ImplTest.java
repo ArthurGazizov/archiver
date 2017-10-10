@@ -1,15 +1,12 @@
 package com.arthur.gazizov.archiver.core.service.lz77;
 
 import com.arthur.gazizov.archiver.core.factory.ArchiverFactory;
-import com.arthur.gazizov.archiver.core.factory.impl.LZ77Factory;
 import com.arthur.gazizov.archiver.core.factory.impl.LZ78Factory;
 import com.arthur.gazizov.archiver.core.factory.impl.ParallelFactory;
 import com.arthur.gazizov.archiver.core.service.AbstractArchiverTest;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -33,9 +30,9 @@ public class LZ77ImplTest extends AbstractArchiverTest {
     for (int i = 0; i < 10_000; i++) {
       builder.append(ThreadLocalRandom.current().nextInt());
     }
-    String originalMessage = "kabababababz" + builder.toString();
+    String originalMessage = "abrakadabra" + builder.toString();
     byte[] originalMessageBytes = originalMessage.getBytes();
-
+    System.err.println(originalMessageBytes.length);
     byte[] compressedBytes = archiverFactory
             .loadCompressor()
             .compress(originalMessageBytes);

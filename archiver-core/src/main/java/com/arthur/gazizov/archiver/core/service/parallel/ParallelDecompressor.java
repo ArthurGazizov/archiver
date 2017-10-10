@@ -15,11 +15,19 @@ import java.util.concurrent.TimeUnit;
  * Created on 02.10.17.
  */
 public class ParallelDecompressor extends AbstractDecompressor {
-  private ArchiverFactory factory;
+  private final ArchiverFactory factory;
+  private final ParallelConfig config;
 
   public ParallelDecompressor(ArchiverFactory factory) {
     this.factory = factory;
+    this.config = new ParallelConfig();
   }
+
+  public ParallelDecompressor(ArchiverFactory factory, ParallelConfig config) {
+    this.factory = factory;
+    this.config = config;
+  }
+
 
   @Override
   protected byte[] process(byte[] bytes) {

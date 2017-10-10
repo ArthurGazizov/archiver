@@ -1,72 +1,86 @@
-package com.arthur.gazizov.archiver.ui.views;//Imports are listed in full to show what's being used
-//could just import javax.swing.* and java.awt.* etc..
+package com.arthur.gazizov.archiver.ui.views;
+
+import com.arthur.gazizov.archiver.core.wrap.FileCompressor;
+import com.arthur.gazizov.archiver.core.wrap.FileDecompressor;
+import com.arthur.gazizov.archiver.core.wrap.FileWorker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.io.File;
 
-public class MainView {
+/**
+ * @author Arthur Gazizov (Cinarra Systems)
+ * Created on 10.10.17.
+ */
+public class MainView extends JFrame {
+  private JButton compressButton;
+  private JRadioButton lzwRadioButton;
+  private JRadioButton lz77RadioButton;
+  private JRadioButton lz78RadioButton;
+  private JButton decompressButton;
+  private JPanel panel1;
+  private FileWorker fileWorker;
+  private JFileChooser fileChooser;
+
+
   public MainView() {
-    JFrame guiFrame = new JFrame();
-    JFileChooser fileChooser = new JFileChooser();
-    JButton button = new JButton();
-    //make sure the program exits when the frame closes
-    guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    guiFrame.setTitle("Example GUI");
-    guiFrame.setSize(300, 250);
+    setContentPane(panel1);
+    setResizable(false);
+    setSize(400, 120);
+    setTitle("Arciver");
+    setLocationRelativeTo(null);
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//    add(encryptButton);
+    setVisible(true);
+    fileWorker = new FileWorker();
 
-    //This will center the JFrame in the middle of the screen
-    guiFrame.setLocationRelativeTo(null);
-
-    //Options for the JComboBox
-    String[] fruitOptions = {"Apple", "Apricot", "Banana"
-            , "Cherry", "Date", "Kiwi", "Orange", "Pear", "Strawberry"};
-
-    //Options for the JList
-    String[] vegOptions = {"Asparagus", "Beans", "Broccoli", "Cabbage"
-            , "Carrot", "Celery", "Cucumber", "Leek", "Mushroom"
-            , "Pepper", "Radish", "Shallot", "Spinach", "Swede"
-            , "Turnip"};
-
-    //The first JPanel contains a JLabel and JCombobox
-    final JPanel comboPanel = new JPanel();
-    JLabel comboLbl = new JLabel("Fruits:");
-    JComboBox fruits = new JComboBox(fruitOptions);
-
-    comboPanel.add(comboLbl);
-    comboPanel.add(fruits);
-
-    //Create the second JPanel. Add a JLabel and JList and
-    //make use the JPanel is not visible.
-    final JPanel listPanel = new JPanel();
-    listPanel.setVisible(false);
-    JLabel listLbl = new JLabel("Vegetables:");
-    JList vegs = new JList(vegOptions);
-    vegs.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-
-    listPanel.add(listLbl);
-    listPanel.add(vegs);
-
-    JButton vegFruitBut = new JButton("Fruit or Veg");
-
-    //FileOpener fileOpener = new FileOpener();
-    vegFruitBut.addActionListener(event -> {
-      listPanel.setVisible(!listPanel.isVisible());
-      comboPanel.setVisible(!comboPanel.isVisible());
-      //fileOpener.setVisible(true);
+    lz77RadioButton.addItemListener(e -> {
+      if (e.getStateChange() == ItemEvent.SELECTED) {
+        lz78RadioButton.setSelected(false);
+        lzwRadioButton.setSelected(false);
+      }
     });
-
-    JFileChooser jFileChooser = new JFileChooser();
-
-    //The JFrame uses the BorderLayout layout manager.
-    //Put the two JPanels and JButton in different areas.
-    guiFrame.add(comboPanel, BorderLayout.NORTH);
-    guiFrame.add(listPanel, BorderLayout.CENTER);
-    guiFrame.add(vegFruitBut, BorderLayout.SOUTH);
-
-    guiFrame.add(jFileChooser);
-
-    //make sure the JFrame is visible
-    guiFrame.setVisible(true);
+    lz78RadioButton.addItemListener(e -> {
+      if (e.getStateChange() == ItemEvent.SELECTED) {
+        lz77RadioButton.setSelected(false);
+        lzwRadioButton.setSelected(false);
+      }
+    });
+    lzwRadioButton.addItemListener(e -> {
+      if (e.getStateChange() == ItemEvent.SELECTED) {
+        lz78RadioButton.setSelected(false);
+        lz77RadioButton.setSelected(false);
+      }
+    });
+    fileChooser = new JFileChooser();
+    compressButton.addActionListener(e -> {
+      final int result = fileChooser.showOpenDialog(new Panel());
+      if (result == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+        fetchCompressor().compress(file.getPath());
+      }
+    });
+    decompressButton.addActionListener(e -> {
+      final int result = fileChooser.showOpenDialog(new Panel());
+      if (result == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+        fetchDecompressor().decompress(file.getPath());
+      }
+    });
   }
 
+  private FileCompressor fetchCompressor() {
+    if (lzwRadioButton.isSelected()) {
+      return fileWorker.lzwCompressor();
+    } else if (lz77RadioButton.isSelected()) {
+      return fileWorker.lz77Compressor();
+    } else {
+      return fileWorker.lz78Compressor();
+    }
+  }
+
+  private FileDecompressor fetchDecompressor() {
+    return fileWorker.decompressor();
+  }
 }

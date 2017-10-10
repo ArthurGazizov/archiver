@@ -11,4 +11,10 @@
     </parent>
 
     <artifactId>archiver-ui</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.arthur.gazizov.kpfu</groupId>
+            <artifactId>archiver-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>

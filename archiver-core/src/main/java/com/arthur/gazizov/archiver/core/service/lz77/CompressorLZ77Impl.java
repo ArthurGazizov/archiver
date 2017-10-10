@@ -27,9 +27,9 @@ public class CompressorLZ77Impl extends AbstractCompressor {
       buffer.add(bytes[position]);
       int lastSuccessIndex = -1;
       int index;
-      while (((index = Collections.indexOfSubList(slidingWindow, buffer)) != -1)
-              && buffer.size() < config.getMaxBufferLength()
-              && position + 1 < bytes.length) {
+      while (buffer.size() < config.getMaxBufferLength()
+              && position + 1 < bytes.length
+              && ((index = Collections.indexOfSubList(slidingWindow, buffer)) != -1)) {
         lastSuccessIndex = index;
         position++;
         buffer.add(bytes[position]);
