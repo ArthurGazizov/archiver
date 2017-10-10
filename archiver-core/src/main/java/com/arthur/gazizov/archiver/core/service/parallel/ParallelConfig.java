@@ -10,4 +10,8 @@ public class ParallelConfig {
   public int getBatchSize() {
     return batchSize;
   }
+
+  public void setBatchSize(int batchSize) {
+    this.batchSize = batchSize;
+  }
 }

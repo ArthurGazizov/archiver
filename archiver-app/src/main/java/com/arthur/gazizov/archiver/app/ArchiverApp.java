@@ -1,6 +1,6 @@
 package com.arthur.gazizov.archiver.app;
 
-import com.arthur.gazizov.archiver.ui.views.MainView;
+import com.arthur.gazizov.archiver.ui.Runner;
 
 /**
  * @author Arthur Gazizov (Cinarra Systems)
@@ -8,6 +8,7 @@ import com.arthur.gazizov.archiver.ui.views.MainView;
  */
 public class ArchiverApp {
   public static void main(String[] args) {
-    MainView mainView = new MainView();
+    Runnable runnable = new Runner();
+    runnable.run();
   }
 }
